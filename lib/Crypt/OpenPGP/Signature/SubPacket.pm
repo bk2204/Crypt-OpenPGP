@@ -19,8 +19,8 @@ use vars qw( %SUBPACKET_TYPES );
             w    => sub { $_[0]->put_int8($_[1]) } },
 
     5  => { name => 'Trust signature',
-            r    => sub { $_[0]->get_int8 },
-            w    => sub { $_[0]->put_int8($_[1]) } },
+            r    => sub { $_[0]->get_bytes(2) },
+            w    => sub { $_[0]->put_bytes($_[1], 2) } },
 
     6  => { name => 'Regular expression',
             r    => sub { $_[0]->bytes },
@@ -108,6 +108,18 @@ use vars qw( %SUBPACKET_TYPES );
             w    => sub {
                           $_[0]->put_int8($_[1]->{code});
                           $_[0]->put_bytes($_[1]->{reason}) } },
+
+    30 => { name => 'Features',
+            r    => sub { $_[0]->bytes },
+            w    => sub { $_[0]->append($_[1]) } },
+
+    31 => { name => 'Signature target',
+            r    => sub { $_[0]->bytes },
+            w    => sub { $_[0]->append($_[1]) } },
+
+    32 => { name => 'Embedded signature',
+            r    => sub { $_[0]->bytes },
+            w    => sub { $_[0]->append($_[1]) } },
 );
 
 sub new { bless { }, $_[0] }
