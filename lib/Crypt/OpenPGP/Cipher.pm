@@ -111,7 +111,7 @@ package Crypt::OpenPGP::Cipher::CAST5;
 use strict;
 use base qw( Crypt::OpenPGP::Cipher );
 
-sub crypt_class { 'Crypt::CAST5_PP' }
+sub crypt_class { ['Crypt::CAST5_PP', 'Crypt::CAST5'] }
 sub keysize { 16 }
 sub blocksize { 8 }
 
